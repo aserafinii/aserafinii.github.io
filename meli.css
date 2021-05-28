@@ -1,6 +1,9 @@
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
+    background-color: #003554;
+    color: aliceblue;
+    line-height: 25px;
 }
 
 .container {
@@ -11,14 +14,14 @@ body {
         align-items: inherit;
         height: inherit;
         flex-wrap: inherit;
-    }
+}
 
 header {
-    background-color: #2F2F2F;
+    background-color: #0582CA;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-    height: 100px;
+    height: 90px;
     flex-wrap: wrap;
     margin: 0;
 }
@@ -38,13 +41,13 @@ header {
 }
 
 .menu ol li a {
-    color: white;
+    color: #003554;
     text-decoration: none;
     height: inherit;
     display: flex;
     align-items: center;
-    padding: 0 12px;
-    font-size: 18px;
+    font-size: 24px;
+    padding: 0px 30px;
 }
 
 ol,
@@ -56,4 +59,105 @@ ul {
 
 .places-item-list {
     list-style: disc;
+}
+
+.hero {
+    height: 350px;
+    background-color: #0582CA;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.hero-img {
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+h1 {
+    font-size: 45px;
+    line-height: 1.5;
+    letter-spacing: -.2;
+    margin: 0;
+}
+
+.hero h1 {
+    font-family: 'Bebas Neue', cursive;
+    display: flex;
+    color: #003554;
+    padding: 10px 10px 10px 150px;
+    font-size: 150px;
+    letter-spacing: 15px;
+}
+
+h2 {
+    font-size: 40px;
+    margin: 30px 0px;
+}
+
+h3 {
+    font-size: 25px;
+}
+
+.caacupe-title {
+    padding: 30px 10px 0px 0px;
+}
+
+.time {
+    margin: 0px;
+}
+
+.balnearios-list{
+    list-style: disc;
+}
+
+.cerros-article-title {
+    margin: 0px;
+}
+
+.ykua-description {
+    background-image: url(imgg/194f0aba-a737-4145-96e2-8610e43dc240.jpg);
+    background-repeat: no-repeat;
+    background-position-x: 500px;
+}
+
+.ykua-img {
+    width: 50%;
+}
+
+.ykua-text {
+    width: 45%;
+}
+
+.papa-description {
+    background-image: url(imgg/73cbd762-282a-4613-86f3-38352fbde73c.jpg);
+    background-repeat: no-repeat;
+    background-position-x: 500px;
+    background-size: auto;
+}
+
+.papa-text {
+    width: 45%;
+}
+.caacupe-text {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.caacupe-description {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.caacupe-img1 {
+    width: 45%;
+    height: 300px;
+}
+
+.caacupe-img2 {
+    width: 45%;
+    height: 300px;
 }
