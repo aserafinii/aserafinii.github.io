@@ -34,17 +34,17 @@ header {
     padding-left: 1.5rem;
 }
 
-.description {
-    margin-left: 3rem;
-    width: 30vw;
+.info  {
+    width: inherit;
 }
 
-.model {
-    width: 40vw;
-    max-width: 25rem;
+.information-section article {
+    width: 25vw;
+    margin: 0 auto;
+    margin: 0 1rem;
 }
 
-.articles-container {
-    max-width: 70rem;
+.information-section {
+    max-width: 90vw;
     margin: 0 auto;
 }

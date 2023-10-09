@@ -41,3 +41,13 @@ nav .mainMenu li a {
     border-radius: 1rem;
     margin-right: 3rem;
 }
+
+.information-section article {
+    width: 10vw;
+    margin: 0 5rem;
+}
+
+.information-section  {
+    max-width: 70vw;
+    margin: 0 auto;
+}

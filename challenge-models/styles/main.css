@@ -146,14 +146,15 @@ nav i {
 }
 
 .info {
-    width: 85vw;
+    width: 70vw;
     border-radius: 1.5rem;
     background-color: rgb(204, 204, 204);
     padding: 1.5rem;
     min-width: 25rem;
-    max-width: 50rem;
+    max-width: 40rem;
     margin: 0 auto;
     margin-bottom: 3rem ;
+    font-size: 1.6rem;
 }
 
 p {
@@ -246,6 +247,37 @@ p {
     padding: 1rem 0rem;
     font-size: 1.4rem;
     font-weight: 500;
+    text-align: center;
+}
+
+#tenonde {
+    background-image: url(/models-images/nande_ru.png);
+    background-size: cover;
+}
+
+#tupa {
+    background-image: url(/models-images/tupa.png);
+    background-size: cover;
+}
+
+#namandu {
+    background-image: url(/models-images/namandu.png);
+    background-size: cover;
+}
+
+#colibri {
+    background-image: url(/models-images/colibiri.png);
+    background-size: cover;
+}
+
+#jakaira {
+    background-image: url(/models-images/jakaira.png);
+    background-size: cover;
+}
+
+#karai {
+    background-image: url(/models-images/karai.png);
+    background-size: cover;
 }
 
 .button {

@@ -150,7 +150,7 @@ nav i {
     background-color: rgb(204, 204, 204);
     padding: 1.5rem;
     min-width: 25rem;
-    max-width: 50rem;
+    max-width: 35rem;
     margin: 0 auto;
     margin-bottom: 3rem;
 }
@@ -178,15 +178,11 @@ p {
     flex-wrap: wrap;
 }
 
-.description {
+.information-section article{
     width: 85vw;
-    border-radius: 1.5rem;
-    background-color: rgb(204, 204, 204);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
     min-width: 25rem;
     max-width: 35rem;
+    margin: 0 auto;
 }
 
 p {

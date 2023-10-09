@@ -154,10 +154,7 @@ nav i {
     max-width: 50rem;
     margin: 0 auto;
     margin-bottom: 3rem;
-}
-
-p {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
 }
 
 .section-title {
@@ -188,10 +185,6 @@ p {
     flex-direction: column;
     min-width: 25rem;
     max-width: 35rem;
-}
-
-p {
-    font-size: 1.4rem;
 }
 
 .description button {
@@ -233,28 +226,57 @@ p {
 }
 
 #jorge div {
-    background-image: url(/main/images/jorgeduro.jpg);
+    background-image: url(/about-us/images/jorge.jpg);
     background-size: cover;
 }
 
 #serafini div {
-    background-image: url(/main/images/jorgeduro.jpg);
+    background-image: url(/about-us/images/serafinijpg.jpg);
+    background-size: cover;
 }
 
 #segrado div {
-    background-image: url(/main/images/jorgeduro.jpg);
+    background-image: url(/about-us/images/segrado.jpeg);
+    background-size: cover;
 }
 
 #agustina div {
-    background-image: url(/main/images/jorgeduro.jpg);
+    background-image: url(/about-us/images/agus.jpg);
+    background-size: cover;
 }
 
 #claudia div {
-    background-image: url(/main/images/jorgeduro.jpg);
+    background-image: url(/about-us/images/claudia.png);
+    background-size: cover;
 }
 
 #mauri div {
-    background-image: url(/main/images/jorgeduro.jpg);
+    background-image: url(/about-us/images/mauri.jpg);
+    background-size: cover;
+}
+
+#jorge  {
+    background-color: #0fe5887c;
+}
+
+#serafini  {
+    background-color: #00ffe169;
+}
+
+#segrado  {
+    background-color: #33a4d867;
+}
+
+#agustina  {
+    background-color: #7187dca2;
+}
+
+#claudia  {
+    background-color: #7240ce8a;
+}
+
+#mauri  {
+    background-color: #af40ce7c;
 }
 
 .personal-details h3 {
@@ -266,7 +288,7 @@ p {
 
 .personal-details p {
     padding: 1rem 0rem;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
 }
 
 .footer {

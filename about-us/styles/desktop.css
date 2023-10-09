@@ -15,7 +15,6 @@
     margin: 0 auto;
 }
 
-
 header {
     position: fixed;
     top: 0;
@@ -37,4 +36,8 @@ nav .mainMenu li a {
     font-size: 1.8rem;
     border-radius: 1rem;
     margin-right: 3rem;
+}
+
+.info {
+    max-width: 75rem;
 }
