@@ -1,0 +1,43 @@
+.hero-text h1 {
+    font-size: 9rem;
+}
+
+.hero-text p {
+    font-size: 1.4rem;
+}
+
+.hero {
+    height: 70rem;
+}
+
+.articles-container {
+    max-width: 100rem;
+    margin: 0 auto;
+}
+
+.info {
+    max-width: 80rem;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    height: 8rem;
+}
+
+.logo {
+    width: 14rem;
+}
+
+nav .mainMenu li a {
+    width: auto;
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-size: 1.8rem;
+    border-radius: 1rem;
+    margin-right: 3rem;
+}

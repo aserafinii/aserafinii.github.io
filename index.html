@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Space Apps</title>
+        <meta charset="utf-8">
+        <meta name="description", content="">
+        <meta name="robots", content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+        <link rel="stylesheet" href="/main/styles/main.css">
+        <link rel="stylesheet" media="screen and (min-width: 600px)" href="/main/styles/tablet.css"> 
+        <link rel="stylesheet" media="screen and (min-width: 1024px)" href="/main/styles/desktop.css">
+        <link rel="icon" type="image/x-icon" href="/main/images/AraSci_icon.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"
+            integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
+    </head>
+    <body>       
+        <header>
+            <figure class="logo-container">
+                <img class="logo" src="/main/images/AraSci_S.png" alt="Logo Boreal">
+            </figure>
+            <nav>       
+                <div class="openMenu"><i class="fa fa-bars"></i></div>
+                <ul class="mainMenu">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="/information/info.html">Information</a></li>
+                    <li><a href="/challenge-models/challenge.html">Challenge</a></li>
+                    <li><a href="/about-us/about-us.html">About</a></li>
+                    <div class="closeMenu"><i class="fa fa-times"></i></div>
+                </ul>
+            </nav>
+        </header> 
+
+        <main>
+            <div class="container">             
+                <div data-am-fadeshow="next-prev-navigation">              
+                        <!-- Radio -->
+                    <input type="radio" name="css-fadeshow" id="slide-1" />
+                    <input type="radio" name="css-fadeshow" id="slide-2" />
+                    <input type="radio" name="css-fadeshow" id="slide-3" />
+                        <!-- Slides -->
+                    <div class="fs-slides">
+                        <div class="fs-slide" id="first-slide">
+                            <div class="hero-text">
+                                <h1>Northern<br>Lights </h1>
+                                <p">Discover the science behind the beauty.</p>
+                            </div>
+                        </div>
+                        <div class="fs-slide" id="second-slide">
+                            <div class="hero-text">
+                                <h1>DSCOVR</h1>
+                                <p">Discover the science behind the beauty.</p>
+                            </div>
+                        </div>
+                        <div class="fs-slide" id="third-slide">
+                            <div class="hero-text">
+                                <h1 style="margin: 0;">A.I.<br></h1>
+                                <p">Discover the science behind the beauty.</p>
+                            </div>
+                        </div>
+                    </div>
+                
+                        <!-- Quick Navigation -->
+                    <div class="fs-quick-nav">
+                        <label class="fs-quick-btn" for="slide-1"></label>
+                        <label class="fs-quick-btn" for="slide-2"></label>
+                        <label class="fs-quick-btn" for="slide-3"></label>
+                    </div>
+                
+                        <!-- Prev Navigation -->
+                    <div class="fs-prev-nav">
+                        <label class="fs-prev-btn" for="slide-1"></label>
+                        <label class="fs-prev-btn" for="slide-2"></label>
+                        <label class="fs-prev-btn" for="slide-3"></label>
+                    </div>
+                
+                        <!-- Next Navigation -->
+                    <div class="fs-next-nav">
+                        <label class="fs-next-btn" for="slide-1"></label>
+                        <label class="fs-next-btn" for="slide-2"></label>
+                        <label class="fs-next-btn" for="slide-3"></label>
+                    </div>     
+                </div>
+            </div>
+            <section class="description-section">
+                <h2 class="section-title">The Challenge</h2>
+                <div class="image-and-description-container">
+                    <div class="challenge-img-container"></div>
+                    <article class="description">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis in modi, neque labore maiores
+                        cupiditate
+                        consectetur dolorem fugit recusandae quidem, magni vitae nam voluptas dolore fuga natus dolores ex?
+                        Voluptatibus.</p>
+                        <button onclick="window.location.href='/challenge-models/challenge.html'" class="button">Learn more</button>
+                    </article>
+                </div>
+                
+            </section>
+            
+            <section class="model-section">
+                <h2 class="section-title">Models</h2>
+                <div class="articles-container">
+                    <article class="model" id="first-model">
+                        <h3>Ñande Ru Tenondé</h3>
+                        <figure class="model-image">
+                            <img src="" alt="">
+                        </figure>
+                        <p>Encoder Forcing Algorithm Model to Multihead Neural Network decoder.</p>
+                    </article>
+                    <article class="model" id="second-model">
+                        <h3>Tupã</h3>
+                        <figure class="model-image">
+                            <img src="" alt="">
+                        </figure>
+                        <p>Multihead Encoders to Multihead Attention decoder.</p>
+                    </article>
+                    <article class="model" id="third-model">
+                        <h3>Ñamandu</h3>
+                        <figure class="model-image">
+                            <img src="" alt="">
+                        </figure>
+                        <p>Single Head Encoder to Multihead Attention decoder.</p>
+                    </article>
+                </div>
+            <button class="button" onclick="window.location.href='/challenge-models/challenge.html'" >Meet the models!</button>
+            </section>
+            
+            <section class="about-us-section">
+                <h2 class="section-title">About Us</h2>
+                <div class="image-and-description-container">
+                    <div class="about-us-img-container"></div>
+                    <article class="description">
+                        <p>We are senior high school students who, thanks to our teacher’s guidance, came across this challenge as a way to test
+                        not only our programming, but also our problem solving and artistic skills.
+                        </p>
+                        <button class="button" onclick="window.location.href='/about-us/about-us.html'">Meet the team!</button>
+                    </article>
+                </div>
+                
+            </section>
+        </main>
+        <footer class="footer">
+            <p>Developed by Serafini</p>
+        </footer>
+        <script src="/main/scripts/app.js"></script>
+        <script>
+function slideshow() {
+  // clone
+  $(".slider-1")
+    .clone()
+    .removeClass("slider-1")
+    .addClass("slider-2")
+    .insertAfter($(".slider"));
+
+  // set first
+  $(".slider-1").slick({
+    draggable: false,
+    dots: false,
+    infinite: true,
+    responsive: true,
+    asNavFor: ".slider-2",
+    touchThreshold: 20,
+    speed: 1000,
+    fade: true,
+  });
+
+  // set second
+  $(".slider-2").slick({
+    dots: true,
+    infinite: true,
+    responsive: true,
+    asNavFor: ".slider-1",
+    arrows: false,
+    speed: 1000,
+    easing: "easeInOutQuart",
+  });
+}
+
+$(function () {
+  slideshow();
+  setTimeout(function () {
+    $(".slider-1 .slick-next").click();
+  }, 1000);
+});
+        </script>
+    </body>
+</html>

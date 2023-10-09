@@ -1,0 +1,60 @@
+.image-and-description-container {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.challenge-img-container {
+    margin-bottom: 0;
+}
+
+.description {
+    margin-left: 3rem;
+    width: 30vw;
+}
+
+.model {
+    width: 40vw;
+    max-width: 25rem;
+}
+
+.articles-container {
+    max-width: 70rem;
+    margin: 0 auto;
+}
+
+.hero-text {
+    text-align: left;
+    left: 30%;
+}
+
+.hero-text h1 {
+    font-size: 5.4rem;
+}
+
+.hero-text p {
+    font-size: 1.4rem;
+}
+
+.container {
+    height: 45rem;
+}
+
+nav .mainMenu li a {
+    width: auto;
+    display: inline-block;
+    padding: 0rem;
+    font-size: 1rem;
+    border-radius: 1rem;
+    margin-right: 2rem;
+    padding: 1rem;
+}
+
+header {
+    height: 7rem;
+}
+
+.logo {
+    width: 12rem;
+    padding-left: 1.5rem;
+}

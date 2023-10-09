@@ -1,0 +1,1048 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'SF Pro Display', sans-serif;
+}
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+header {
+    background-color: black;
+    height: 5rem;
+    display: flex;
+    justify-content: space-between
+}
+
+.logo-container {
+    width: 40rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 1rem;
+}
+
+.logo {
+    height: auto;
+    width: 7rem;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav .mainMenu {
+    display: flex;
+    list-style: none;
+}
+
+nav .mainMenu li a {
+    display: inline-block;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: white;
+    font-size: 2rem;
+    transition: 0.2s ease;
+    border-radius: 1rem;
+    margin-right: 2rem;
+    padding: 1rem;
+}
+
+nav .openMenu,
+nav .closeMenu {
+    height: 2rem;
+    width: auto;
+    margin-right: 1.5rem;
+    display: none;
+    cursor: pointer;
+}
+
+nav .mainMenu .closeMenu,
+nav i {
+    font-size: 2rem;
+    cursor: pointer;
+    color: white;
+}
+
+@media (max-width: 599px) {
+    nav .mainMenu {
+        height: 100vh;
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        left: 0px;
+        z-index: 10;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: rgb(0, 0, 0);
+        transition: top 1s ease 0s;
+        display: none;
+    }
+
+    nav .mainMenu .closeMenu {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    nav .openMenu {
+        display: block;
+    }
+
+    nav .mainMenu li a:hover {
+        background: none;
+        color: #0fe588;
+    }
+
+    .icons i {
+        display: inline-block;
+        padding: 1.2rem;
+    }
+}
+
+#first-slide {
+    background-image: url(/main/images/aurora.png);
+}
+
+#second-slide {
+    background-image: url(/main/images/SunSat.jpeg);
+}
+
+#third-slide {
+    background-image: url(/main/images/neuron_copia.png);
+}
+
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.hero-text h1 {
+    margin-top: 0;
+    margin-bottom: 0.8vw;
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+.hero-text p {
+    font-size: 12px;
+    font-weight: 100;
+    margin-top: 0;
+    font-weight: bold;
+}
+
+.container {
+    width: 100%;
+    height: 40rem;
+    position: static;
+    overflow: hidden;
+    margin-bottom: 5rem;
+}
+
+/*
+ * CSS Fadeshow by @alexerlandsson
+ * This is a fadeshow built in CSS and with customization in focus.
+ * Supports quick navigation, prev/next navigation and autoplay.
+ * 
+ * For better documentation and implementation guide, check out the GitHub repository:
+ * https://github.com/alexerlandsson/css-fadeshow
+*/
+/*
+ * ===== VARIABLES =====
+ *
+ * Change these variables to match your preferences. For a more detailed
+ * description of what each variable do, visit https://github.com/alexerlandsson/css-fadeshow
+ */
+/*
+ * ===== MIXINS =====
+ *
+ * This section contains mixin used
+ * Do not change anything here unless you know what you are doing.
+ */
+/* Mixins to handle prefixes */
+/* Mixins to handle Quick Navigation Button states */
+/*
+ * ===== FADESHOW =====
+ *
+ * Base functionality for the fadeshow.
+ * Do not change anything here unless you know what you are doing.
+ */
+[data-am-fadeshow] {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #fff;
+    /* Slides */
+    /* Quick Navigation */
+    /* Prev/Next Navigation */
+    /* Base functionality */
+    /* Autohide Prev/Next Navigation */
+}
+
+[data-am-fadeshow] .fs-slide {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: opacity 1s ease;
+    /* Display first child on load */
+}
+
+[data-am-fadeshow] .fs-slide:first-child {
+    opacity: 1;
+}
+
+[data-am-fadeshow] .fs-quick-nav {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    z-index: 1;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    transform: translateX(-50%);
+}
+
+[data-am-fadeshow] .fs-quick-btn {
+    display: inline-block;
+    width: 0.7rem;
+    height: 0.7em;
+    margin: 0 2px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: opacity 200ms ease;
+    background-color: rgba(54, 54, 54, 0.8);
+    /* Set active state to first button on load */
+}
+
+[data-am-fadeshow] .fs-quick-btn:hover {
+    opacity: 0.4;
+}
+
+[data-am-fadeshow] .fs-quick-btn:first-child {
+    background-color: rgb(255, 255, 255);
+}
+
+[data-am-fadeshow] .fs-next-btn,
+[data-am-fadeshow] .fs-prev-btn {
+    position: absolute;
+    display: none;
+    top: 0;
+    bottom: 0;
+    width: 6rem;
+    cursor: pointer;
+    background-color: rgba(167, 0, 0, 0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    transition: all 200ms ease;
+}
+
+@media (max-width: 500px) {
+
+    [data-am-fadeshow] .fs-next-btn,
+    [data-am-fadeshow] .fs-prev-btn {
+        width: 50%;
+    }
+}
+
+[data-am-fadeshow] .fs-next-btn:before,
+[data-am-fadeshow] .fs-prev-btn:before {
+    position: absolute;
+    top: 50%;
+    font-size: 2.4rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+[data-am-fadeshow] .fs-next-btn:hover,
+[data-am-fadeshow] .fs-prev-btn:hover {
+    background-color: rgba(39, 39, 39, 0.1);
+}
+
+@media (max-width: 500px) {
+    [data-am-fadeshow] .fs-next-btn:hover,
+    [data-am-fadeshow] .fs-prev-btn:hover {
+        background-color: rgba(39, 39, 39, 0.1);
+    }
+}
+
+[data-am-fadeshow] .fs-prev-btn {
+    left: 0;
+    transform: translateX(-100%);
+}
+
+[data-am-fadeshow] .fs-prev-btn:before {
+    content: "❮";
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media (max-width: 500px) {
+    [data-am-fadeshow] .fs-prev-btn:before {
+        left: 30px;
+    }
+}
+
+@media (max-width: 500px) {
+    [data-am-fadeshow] .fs-prev-btn {
+        transform: translate(0);
+    }
+}
+
+[data-am-fadeshow] .fs-next-btn {
+    right: 0;
+    transform: translateX(100%);
+}
+
+[data-am-fadeshow] .fs-next-btn:before {
+    content: "❯";
+    right: 50%;
+    transform: translate(50%, -50%);
+}
+
+@media (max-width: 500px) {
+    [data-am-fadeshow] .fs-next-btn:before {
+        right: 30px;
+    }
+}
+
+@media (max-width: 500px) {
+    [data-am-fadeshow] .fs-next-btn {
+        transform: translate(0);
+    }
+}
+
+[data-am-fadeshow] input[type=radio] {
+    position: fixed;
+    top: -9999px;
+}
+
+[data-am-fadeshow] input[type=radio]:checked {
+    /* This loop handles the slide switching and quick navigation active state */
+    /* Hide navigation if only one slide */
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(5) {
+    /* Show slide */
+    /* Add active state to dot */
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(5)~.fs-slides .fs-slide {
+    opacity: 0;
+    animation: none !important;
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(5)~.fs-slides .fs-slide:nth-child(5) {
+    opacity: 1;
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(5)~.fs-quick-nav .fs-quick-btn {
+    background-color: rgba(255, 0, 0, 0.8);
+    /* Cancel autoplay */
+    animation: none !important;
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(5)~.fs-quick-nav .fs-quick-btn:nth-child(5) {
+    background-color: rgb(255, 0, 0);
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(5)~.fs-quick-nav .fs-quick-btn:nth-child(5):hover {
+    opacity: 1;
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(4) {
+    /* Show slide */
+    /* Add active state to dot */
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(4)~.fs-slides .fs-slide {
+    opacity: 0;
+    animation: none !important;
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(4)~.fs-slides .fs-slide:nth-child(4) {
+    opacity: 1;
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(4)~.fs-quick-nav .fs-quick-btn {
+    background-color: rgba(68, 68, 68, 0.8);
+    /* Cancel autoplay */
+    animation: none !important;
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(4)~.fs-quick-nav .fs-quick-btn:nth-child(4) {
+    background-color: rgba(68, 68, 68, 0.8);
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(4)~.fs-quick-nav .fs-quick-btn:nth-child(4):hover {
+    opacity: 1;
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(3) {
+    /* Show slide */
+    /* Add active state to dot */
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(3)~.fs-slides .fs-slide {
+    opacity: 0;
+    animation: none !important;
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(3)~.fs-slides .fs-slide:nth-child(3) {
+    opacity: 1;
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(3)~.fs-quick-nav .fs-quick-btn {
+    background-color: rgba(68, 68, 68, 0.8);
+    /* Cancel autoplay */
+    animation: none !important;
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(3)~.fs-quick-nav .fs-quick-btn:nth-child(3) {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(3)~.fs-quick-nav .fs-quick-btn:nth-child(3):hover {
+    opacity: 1;
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(2) {
+    /* Show slide */
+    /* Add active state to dot */
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(2)~.fs-slides .fs-slide {
+    opacity: 0;
+    animation: none !important;
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(2)~.fs-slides .fs-slide:nth-child(2) {
+    opacity: 1;
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(2)~.fs-quick-nav .fs-quick-btn {
+    background-color: rgba(68, 68, 68, 0.8);
+    /* Cancel autoplay */
+    animation: none !important;
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(2)~.fs-quick-nav .fs-quick-btn:nth-child(2) {
+    background-color: rgb(255, 255, 255);
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(2)~.fs-quick-nav .fs-quick-btn:nth-child(2):hover {
+    opacity: 1;
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(1) {
+    /* Show slide */
+    /* Add active state to dot */
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(1)~.fs-slides .fs-slide {
+    opacity: 0;
+    animation: none !important;
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(1)~.fs-slides .fs-slide:nth-child(1) {
+    opacity: 1;
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(1)~.fs-quick-nav .fs-quick-btn {
+    background-color: rgba(68, 68, 68, 0.8);
+    /* Cancel autoplay */
+    animation: none !important;
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(1)~.fs-quick-nav .fs-quick-btn:nth-child(1) {
+    background-color: rgb(255, 255, 255);
+}
+
+[data-am-fadeshow] input[type=radio]:checked:nth-of-type(1)~.fs-quick-nav .fs-quick-btn:nth-child(1):hover {
+    opacity: 1;
+}
+
+[data-am-fadeshow] input[type=radio]:checked:first-of-type:last-of-type~.fs-quick-nav,
+[data-am-fadeshow] input[type=radio]:checked:first-of-type:last-of-type~.fs-prev-nav,
+[data-am-fadeshow] input[type=radio]:checked:first-of-type:last-of-type~.fs-next-nav {
+    display: none !important;
+}
+
+[data-am-fadeshow]:hover .fs-prev-btn,
+[data-am-fadeshow]:hover .fs-next-btn {
+    transform: translateX(0);
+}
+
+
+/*
+ * ===== PREV/NEXT NAVIGATION =====
+ *
+ * This section handles the prev/next navigation.
+ */
+/* Handle Prev/Next buttons */
+
+[data-am-fadeshow~=next-prev-navigation] {
+    /* Display first pair of Prev/Next Buttons on load */
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(5) {
+    /* Show previous button */
+    /* Show next button */
+    /* Show last prev button if first slide */
+    /* Show first next button if last slide */
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(5)~.fs-prev-nav .fs-prev-btn {
+    display: none;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(5)~.fs-prev-nav .fs-prev-btn:nth-child(4) {
+    display: block;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(5):first-of-type~.fs-prev-nav .fs-prev-btn:last-child {
+    display: block;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(5):last-of-type~.fs-next-nav .fs-next-btn:first-child {
+    display: block;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(4) {
+    /* Show previous button */
+    /* Show next button */
+    /* Show last prev button if first slide */
+    /* Show first next button if last slide */
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(4)~.fs-prev-nav .fs-prev-btn {
+    display: none;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(4)~.fs-prev-nav .fs-prev-btn:nth-child(3) {
+    display: block;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(4)~.fs-next-nav .fs-next-btn {
+    display: none;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(4)~.fs-next-nav .fs-next-btn:nth-child(5) {
+    display: block;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(4):first-of-type~.fs-prev-nav .fs-prev-btn:last-child {
+    display: block;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(4):last-of-type~.fs-next-nav .fs-next-btn:first-child {
+    display: block;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(3) {
+    /* Show previous button */
+    /* Show next button */
+    /* Show last prev button if first slide */
+    /* Show first next button if last slide */
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(3)~.fs-prev-nav .fs-prev-btn {
+    display: none;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(3)~.fs-prev-nav .fs-prev-btn:nth-child(2) {
+    display: block;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(3)~.fs-next-nav .fs-next-btn {
+    display: none;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(3)~.fs-next-nav .fs-next-btn:nth-child(4) {
+    display: block;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(3):first-of-type~.fs-prev-nav .fs-prev-btn:last-child {
+    display: block;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(3):last-of-type~.fs-next-nav .fs-next-btn:first-child {
+    display: block;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(2) {
+    /* Show previous button */
+    /* Show next button */
+    /* Show last prev button if first slide */
+    /* Show first next button if last slide */
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(2)~.fs-prev-nav .fs-prev-btn {
+    display: none;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(2)~.fs-prev-nav .fs-prev-btn:nth-child(1) {
+    display: block;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(2)~.fs-next-nav .fs-next-btn {
+    display: none;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(2)~.fs-next-nav .fs-next-btn:nth-child(3) {
+    display: block;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(2):first-of-type~.fs-prev-nav .fs-prev-btn:last-child {
+    display: block;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(2):last-of-type~.fs-next-nav .fs-next-btn:first-child {
+    display: block;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(1) {
+    /* Show previous button */
+    /* Show next button */
+    /* Show last prev button if first slide */
+    /* Show first next button if last slide */
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(1)~.fs-next-nav .fs-next-btn {
+    display: none;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(1)~.fs-next-nav .fs-next-btn:nth-child(2) {
+    display: block;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(1):first-of-type~.fs-prev-nav .fs-prev-btn:last-child {
+    display: block;
+}
+
+[data-am-fadeshow~=next-prev-navigation] input[type=radio]:checked:nth-of-type(1):last-of-type~.fs-next-nav .fs-next-btn:first-child {
+    display: block;
+}
+
+[data-am-fadeshow~=next-prev-navigation] .fs-prev-btn:last-child {
+    display: block;
+}
+
+[data-am-fadeshow~=next-prev-navigation] .fs-next-btn:nth-child(2) {
+    display: block;
+}
+
+/*
+ * ===== AUTOPLAY =====
+ *
+ * Functions to handle autoplay.
+ * If you're not going to use autoplay, set $autoplay to false.
+ * This part tends to compile into a lot of uneccesary CSS otherwise.
+ */
+@keyframes quickNavAnimation-5 {
+    0% {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    4%,
+    20% {
+        background-color: coral;
+    }
+
+    24%,
+    100% {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+}
+
+@keyframes slidesAnimation-5 {
+    0% {
+        opacity: 0;
+    }
+
+    4%,
+    20% {
+        opacity: 1;
+    }
+
+    24%,
+    100% {
+        opacity: 0;
+    }
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(5):last-of-type~.fs-slides .fs-slide {
+    animation: slidesAnimation-5 25s infinite;
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(5):last-of-type~.fs-quick-nav .fs-quick-btn {
+    animation: quickNavAnimation-5 25s infinite;
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(5):last-of-type~.fs-slides .fs-slide:nth-child(1),
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(5):last-of-type~.fs-quick-nav .fs-quick-btn:nth-child(1) {
+    animation-delay: -1s;
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(5):last-of-type~.fs-slides .fs-slide:nth-child(2),
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(5):last-of-type~.fs-quick-nav .fs-quick-btn:nth-child(2) {
+    animation-delay: 4s;
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(5):last-of-type~.fs-slides .fs-slide:nth-child(3),
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(5):last-of-type~.fs-quick-nav .fs-quick-btn:nth-child(3) {
+    animation-delay: 9s;
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(5):last-of-type~.fs-slides .fs-slide:nth-child(4),
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(5):last-of-type~.fs-quick-nav .fs-quick-btn:nth-child(4) {
+    animation-delay: 14s;
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(5):last-of-type~.fs-slides .fs-slide:nth-child(5),
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(5):last-of-type~.fs-quick-nav .fs-quick-btn:nth-child(5) {
+    animation-delay: 19s;
+}
+
+@keyframes quickNavAnimation-4 {
+    0% {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    5%,
+    25% {
+        background-color: coral;
+    }
+
+    30%,
+    100% {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+}
+
+@keyframes slidesAnimation-4 {
+    0% {
+        opacity: 0;
+    }
+
+    5%,
+    25% {
+        opacity: 1;
+    }
+
+    30%,
+    100% {
+        opacity: 0;
+    }
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(4):last-of-type {
+    /* Slide animation */
+    /* Quick navigation animation */
+    /* Animation Delay */
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(4):last-of-type~.fs-slides .fs-slide {
+    animation: slidesAnimation-4 20s infinite;
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(4):last-of-type~.fs-quick-nav .fs-quick-btn {
+    animation: quickNavAnimation-4 20s infinite;
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(4):last-of-type~.fs-slides .fs-slide:nth-child(1),
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(4):last-of-type~.fs-quick-nav .fs-quick-btn:nth-child(1) {
+    animation-delay: -1s;
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(4):last-of-type~.fs-slides .fs-slide:nth-child(2),
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(4):last-of-type~.fs-quick-nav .fs-quick-btn:nth-child(2) {
+    animation-delay: 4s;
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(4):last-of-type~.fs-slides .fs-slide:nth-child(3),
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(4):last-of-type~.fs-quick-nav .fs-quick-btn:nth-child(3) {
+    animation-delay: 9s;
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(4):last-of-type~.fs-slides .fs-slide:nth-child(4),
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(4):last-of-type~.fs-quick-nav .fs-quick-btn:nth-child(4) {
+    animation-delay: 14s;
+}
+
+@keyframes quickNavAnimation-3 {
+    0% {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    6.6666666667%,
+    33.3333333333% {
+        background-color: coral;
+    }
+
+    40%,
+    100% {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+}
+
+@keyframes slidesAnimation-3 {
+    0% {
+        opacity: 0;
+    }
+
+    6.6666666667%,
+    33.3333333333% {
+        opacity: 1;
+    }
+
+    40%,
+    100% {
+        opacity: 0;
+    }
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(3):last-of-type {
+    /* Slide animation */
+    /* Quick navigation animation */
+    /* Animation Delay */
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(3):last-of-type~.fs-slides .fs-slide {
+    animation: slidesAnimation-3 15s infinite;
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(3):last-of-type~.fs-quick-nav .fs-quick-btn {
+    animation: quickNavAnimation-3 15s infinite;
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(3):last-of-type~.fs-slides .fs-slide:nth-child(1),
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(3):last-of-type~.fs-quick-nav .fs-quick-btn:nth-child(1) {
+    animation-delay: -1s;
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(3):last-of-type~.fs-slides .fs-slide:nth-child(2),
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(3):last-of-type~.fs-quick-nav .fs-quick-btn:nth-child(2) {
+    animation-delay: 4s;
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(3):last-of-type~.fs-slides .fs-slide:nth-child(3),
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(3):last-of-type~.fs-quick-nav .fs-quick-btn:nth-child(3) {
+    animation-delay: 9s;
+}
+
+@keyframes quickNavAnimation-2 {
+    0% {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    10%,
+    50% {
+        background-color: coral;
+    }
+
+    60%,
+    100% {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+}
+
+@keyframes slidesAnimation-2 {
+    0% {
+        opacity: 0;
+    }
+
+    10%,
+    50% {
+        opacity: 1;
+    }
+
+    60%,
+    100% {
+        opacity: 0;
+    }
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(2):last-of-type {
+    /* Slide animation */
+    /* Quick navigation animation */
+    /* Animation Delay */
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(2):last-of-type~.fs-slides .fs-slide {
+    animation: slidesAnimation-2 10s infinite;
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(2):last-of-type~.fs-quick-nav .fs-quick-btn {
+    animation: quickNavAnimation-2 10s infinite;
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(2):last-of-type~.fs-slides .fs-slide:nth-child(1),
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(2):last-of-type~.fs-quick-nav .fs-quick-btn:nth-child(1) {
+    animation-delay: -1s;
+}
+
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(2):last-of-type~.fs-slides .fs-slide:nth-child(2),
+[data-am-fadeshow~=autoplay] input[type=radio]:nth-of-type(2):last-of-type~.fs-quick-nav .fs-quick-btn:nth-child(2) {
+    animation-delay: 4s;
+}
+
+/*# sourceMappingURL=main.css.map */
+
+.description-section,
+.about-us-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.image-and-description-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.challenge-img-container,
+.about-us-img-container {
+    height: 50vw;
+    width: 50vw;
+    border: 1px black solid;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    max-width: 20rem;
+    max-height: 20rem;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.challenge-img-container {
+    background-image: url(/main/images/jorgejoroba.jpg);
+}
+
+.about-us-img-container {
+    background-image: url(/main/images/jorgeduro.jpg);
+}
+
+.description {
+    width: 85vw;
+    border-radius: 1.5rem;
+    background-color: rgb(204, 204, 204);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    min-width: 25rem;
+    max-width: 35rem;
+}
+
+ p {
+    font-size: 1.4rem;
+}
+
+.description button {
+    margin-top: 1rem;
+}
+
+.section-title {
+    padding-bottom: 2rem;
+    font-size: 2.8rem;
+    text-align: center;
+}
+
+.articles-container{
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.model-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.model-section button {
+    width: auto;
+    font-size: 1.6rem;
+    margin-bottom: 3rem;
+}
+
+.model {
+    border-radius: 1.5rem;
+    background-color: rgb(204, 204, 204);
+    min-width: 25rem;
+    max-width: 35rem;
+    margin: 0rem 2rem 3rem 2rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.model-image {
+    height: 14rem;
+    width: 14rem;
+    border: 1px black solid;
+    border-radius: 1rem;
+    background-color: white;
+    align-self: center;
+    margin-top: 1rem;
+}
+
+.model h3 {
+    padding: 0.3rem 0rem;
+    font-size: 1.8rem;
+    align-self: center;
+}
+
+.model p {
+    padding: 1rem 0rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.button {
+    font-size: 1.4rem;
+    padding: 0.5rem 1rem;
+    width: auto;
+    align-self: center;
+    background-color: white;
+    border: solid white 1px;
+    border-radius: 0.5rem;
+    box-shadow: 0.1rem 0.1rem 0.8rem black;
+    outline: none;
+    transition: 0.3s;
+}
+
+.button:hover {
+    border: 0;
+    color: white;
+    background-color: #000000;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    height: 5rem;
+}
+
+.footer p {
+    color: white;
+}
