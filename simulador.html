@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Código Python - Modelo SIR</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        .codigo-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .voltar-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .voltar-link:hover {
+            text-decoration: underline;
+        }
+        
+        .instrucoes {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .instrucoes code {
+            background: #e9ecef;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .downloads {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+        
+        .btn-download {
+            background: #27ae60;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+            color: white;
+        }
+        
+        .arquivo-section {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .arquivo-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .arquivo-section p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Código Python</h1>
+            <p class="subtitle">Programa que gera a animação do modelo SIR</p>
+        </div>
+    </header>
+
+    <main class="codigo-container">
+        <a href="index.html" class="voltar-link">← Voltar para o site</a>
+        
+        <div class="instrucoes">
+            <h3>Como rodar</h3>
+            <p>Baixe os 3 arquivos abaixo, coloque na mesma pasta, e rode no terminal:</p>
+            <p><code>python vis_matplotlib.py</code></p>
+            <p>O programa vai pedir os parâmetros e mostrar a animação do modelo SIR.</p>
+        </div>
+        
+        <div class="downloads">
+            <a href="vis_matplotlib.py" download class="btn-download">⬇ vis_matplotlib.py</a>
+            <a href="sir_core.py" download class="btn-download">⬇ sir_core.py</a>
+            <a href="utils.py" download class="btn-download">⬇ utils.py</a>
+        </div>
+
+        <div class="arquivo-section">
+            <h3>vis_matplotlib.py</h3>
+            <p>Arquivo principal - gera a animação interativa:</p>
+            <pre><code>import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+from sir_core import resolver_sir
+from utils import obter_parametros_usuario
+
+
+def executar_animacao_matplotlib():
+    # pega os parâmetros do usuário no terminal
+    (populacao_total, infectados_iniciais, recuperados_iniciais, 
+     taxa_transmissao, taxa_recuperacao, dias_simulacao, taxa_vital) = obter_parametros_usuario()
+
+    # resolve o modelo SIR
+    tempo, suscetiveis, infectados, recuperados, r0 = resolver_sir(
+        populacao_total, infectados_iniciais, recuperados_iniciais,
+        taxa_transmissao, taxa_recuperacao, dias_simulacao, taxa_vital
+    )
+
+    # configuração do gráfico
+    figura, eixo = plt.subplots(figsize=(10, 6))
+    eixo.set_xlim(0, dias_simulacao)
+    eixo.set_ylim(0, populacao_total)
+    eixo.set_xlabel('Tempo (dias)')
+    eixo.set_ylabel('População')
+    
+    sufixo_titulo = " (Pop. Aberta)" if taxa_vital > 0 else ""
+    eixo.set_title(f'Modelo SIR{sufixo_titulo} (N={populacao_total})')
+    
+    # linhas do gráfico
+    linha_s, = eixo.plot([], [], 'b-', label='Suscetíveis', linewidth=2)
+    linha_i, = eixo.plot([], [], 'r-', label='Infectados', linewidth=2)
+    linha_r, = eixo.plot([], [], 'g-', label='Recuperados', linewidth=2)
+    
+    eixo.legend()
+    eixo.grid(True, alpha=0.3)
+
+    def inicializar():
+        linha_s.set_data([], [])
+        linha_i.set_data([], [])
+        linha_r.set_data([], [])
+        return linha_s, linha_i, linha_r
+
+    def atualizar(frame):
+        tempo_atual = tempo[:frame]
+        suscetiveis_atual = suscetiveis[:frame]
+        infectados_atual = infectados[:frame]
+        recuperados_atual = recuperados[:frame]
+        
+        linha_s.set_data(tempo_atual, suscetiveis_atual)
+        linha_i.set_data(tempo_atual, infectados_atual)
+        linha_r.set_data(tempo_atual, recuperados_atual)
+        
+        return linha_s, linha_i, linha_r
+
+    # cria a animação
+    animacao = FuncAnimation(
+        figura, atualizar, 
+        frames=range(1, len(tempo)+1, 2),
+        init_func=inicializar, 
+        blit=True, 
+        interval=30
+    )
+    
+    print("Gerando animação Matplotlib...")
+    plt.show()
+
+
+if __name__ == "__main__":
+    executar_animacao_matplotlib()</code></pre>
+        </div>
+
+        <div class="arquivo-section">
+            <h3>sir_core.py</h3>
+            <p>Módulo com as equações do modelo SIR e o solver:</p>
+            <pre><code>import numpy as np
+from scipy.integrate import solve_ivp
+
+
+def derivadas_sir(tempo, estado, populacao_total, taxa_transmissao, taxa_recuperacao, taxa_vital):
+    """
+    Calcula as derivadas do sistema SIR.
+    Retorna [dS/dt, dI/dt, dR/dt] dado o estado atual.
+    """
+    suscetiveis, infectados, recuperados = estado
+    
+    # força de infecção (λ = β * I / N)
+    forca_infeccao = taxa_transmissao * infectados / populacao_total
+    
+    # as derivadas do sistema SIR
+    dS_dt = taxa_vital * populacao_total - forca_infeccao * suscetiveis - taxa_vital * suscetiveis
+    dI_dt = forca_infeccao * suscetiveis - taxa_recuperacao * infectados - taxa_vital * infectados
+    dR_dt = taxa_recuperacao * infectados - taxa_vital * recuperados
+    
+    return [dS_dt, dI_dt, dR_dt]
+
+
+def resolver_sir(populacao_total, infectados_iniciais, recuperados_iniciais, 
+                 taxa_transmissao, taxa_recuperacao, dias, taxa_vital=0.0):
+    """
+    Resolve o modelo SIR usando Runge-Kutta do SciPy.
+    """
+    # condições iniciais
+    suscetiveis_inicial = populacao_total - infectados_iniciais - recuperados_iniciais
+    estado_inicial = [suscetiveis_inicial, infectados_iniciais, recuperados_iniciais]
+    
+    # intervalo de tempo
+    intervalo = (0, dias)
+    pontos_tempo = np.linspace(0, dias, dias + 1)
+    
+    # resolver usando RK do SciPy
+    solucao = solve_ivp(
+        derivadas_sir,
+        intervalo,
+        estado_inicial,
+        method='RK45',
+        t_eval=pontos_tempo,
+        args=(populacao_total, taxa_transmissao, taxa_recuperacao, taxa_vital)
+    )
+    
+    # extrair resultados
+    tempo = solucao.t
+    suscetiveis = solucao.y[0]
+    infectados = solucao.y[1]
+    recuperados = solucao.y[2]
+    
+    # calcular R₀
+    r0 = taxa_transmissao / (taxa_recuperacao + taxa_vital)
+    
+    return tempo, suscetiveis, infectados, recuperados, r0</code></pre>
+        </div>
+
+        <div class="arquivo-section">
+            <h3>utils.py</h3>
+            <p>Função que pega os parâmetros do usuário no terminal:</p>
+            <pre><code>def obter_parametros_usuario():
+    print("Apertar Enter para usar o valor padrão.\n")
+
+    def obter_entrada(prompt, padrao, tipo=float):
+        try:
+            valor = input(f"{prompt} [{padrao}]: ").strip()
+            if not valor:
+                return padrao
+            return tipo(valor)
+        except ValueError:
+            print(f"Valor inválido. usaremos então o padrão: {padrao}")
+            return padrao
+
+    populacao_total = obter_entrada("População Total (N)", 1000, int)
+    infectados_iniciais = obter_entrada("Infectados Iniciais (I0)", 1, int)
+    recuperados_iniciais = obter_entrada("Recuperados Iniciais (R0)", 0, int)
+    dias_simulacao = obter_entrada("Dias de Simulação", 365, int)
+    
+    print("\nParâmetros da Doença")
+    taxa_transmissao = obter_entrada("Taxa de Transmissão (0.3)", 0.3, float)
+    taxa_recuperacao = obter_entrada("Taxa de Recuperação (0.1)", 0.1, float)
+    
+    print("\n--- Parâmetros Demográficos (Opcional) ---")
+    print("Use 0 para população fechada (sem nascimentos/mortes).")
+    taxa_vital = obter_entrada("Taxa de natalidade/mortalidade (mu) (ex: 0.01)", 0.0, float)
+
+    return populacao_total, infectados_iniciais, recuperados_iniciais, taxa_transmissao, taxa_recuperacao, dias_simulacao, taxa_vital</code></pre>
+        </div>
+    </main>
+</body>
+</html>

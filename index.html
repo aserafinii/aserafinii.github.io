@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelo SIR e Estabilidade - Epidemiologia Matemática</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fonte Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+    <!-- MathJax para equações -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Análise do Modelo SIR com Dinâmica Vital e Estabilidade</h1>
+            <p class="subtitle">Modelagem Matemática em Epidemiologia</p>
+            <div class="authors">
+                <span>Pedro Cid</span> &bull; <span>Angelo Serafini</span>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#introducao">Introdução</a></li>
+                <li><a href="#modelo">O Modelo</a></li>
+                <li><a href="#metodos-numericos">Solução Numérica</a></li>
+                <li><a href="#comparacao">Comparação</a></li>
+                <li><a href="#estabilidade">Estabilidade</a></li>
+                <li><a href="#periodicidade">Oscilações</a></li>
+                <li><a href="simulador.html">Código</a></li>
+                <li><a href="#grupo">Grupo</a></li>
+                <li><a href="#referencias">Referências</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <section id="introducao">
+            <h2>Ideia Geral</h2>
+            <p>
+                Na epidemiologia matemática, usamos modelos dinâmicos para descrever como as doenças evoluem. 
+                De forma simplificada, entendemos um modelo dinâmico como um sistema que muda com o tempo, 
+                onde a situação atual define o que vai acontecer em seguida. Em vez de olhar para um momento parado, 
+                observamos o fluxo contínuo de pessoas entre diferentes estados.
+            </p>
+            <p>
+                O modelo SIR aplica isso dividindo a população em três grupos: <strong>Suscetíveis</strong>, 
+                <strong>Infectados</strong> e <strong>Recuperados</strong>. As equações que apresentamos definem 
+                justamente como as pessoas passam de um grupo para o outro.
+            </p>
+        </section>
+
+        <section id="modelo">
+            <h2>O Modelo SIR com Dinâmica Vital</h2>
+            <p>
+                Consideramos uma população total \(N\). Assumimos que as taxas de natalidade e mortalidade são iguais (\(\mu\)), 
+                o que mantém o número total de pessoas constante. As equações diferenciais que regem o sistema são:
+            </p>
+            
+            <div class="equation-box">
+                $$ \frac{dS}{dt} = \mu N - \beta \frac{S I}{N} - \mu S $$
+                $$ \frac{dI}{dt} = \beta \frac{S I}{N} - \gamma I - \mu I $$
+                $$ \frac{dR}{dt} = \gamma I - \mu R $$
+            </div>
+
+            <ul class="params-list">
+                <li><strong>\(\beta\)</strong>: Taxa de transmissão.</li>
+                <li><strong>\(\gamma\)</strong>: Taxa de recuperação.</li>
+                <li><strong>\(\mu\)</strong>: Taxa de natalidade/mortalidade.</li>
+            </ul>
+
+            <h3>Número Básico de Reprodução (\(R_0\))</h3>
+            <p>
+                O parâmetro \(R_0\) define a média de infecções produzidas por um único indivíduo infectado em uma população suscetível.
+                Para o nosso modelo:
+            </p>
+            <div class="equation-box small">
+                $$ R_0 = \frac{\beta}{\gamma + \mu} $$
+            </div>
+            <p class="note">
+                Se \(R_0 > 1\), a doença pode invadir a população (epidemia). Se \(R_0 < 1\), a doença tende a desaparecer.
+            </p>
+        </section>
+
+        <section id="metodos-numericos">
+            <h2>Por que Precisamos de Métodos Numéricos?</h2>
+            <p>
+                O sistema SIR <strong>não possui solução analítica fechada</strong> devido à não-linearidade 
+                do termo \(\beta \frac{SI}{N}\). Para obter as curvas \(S(t), I(t), R(t)\), usamos o 
+                <strong>método Runge-Kutta</strong> disponível na biblioteca SciPy.
+            </p>
+
+            <h3>Definições</h3>
+            <p>O método trabalha com os seguintes elementos:</p>
+            <ul class="params-list">
+                <li><strong>\(y_n = (S_n, I_n, R_n)\)</strong>: vetor de estado no instante \(t_n\).</li>
+                <li><strong>\(f(y)\)</strong>: função que retorna as derivadas \(\left(\frac{dS}{dt}, \frac{dI}{dt}, \frac{dR}{dt}\right)\) dado um estado \(y\).</li>
+                <li><strong>\(h\)</strong>: tamanho do passo de tempo.</li>
+                <li><strong>\(k_1, k_2, k_3, k_4\)</strong>: estimativas da derivada em diferentes pontos do intervalo \([t_n, t_{n+1}]\).</li>
+            </ul>
+
+            <h3>O Método Runge-Kutta</h3>
+            <p>
+                O RK4 calcula o próximo estado \(y_{n+1}\) avaliando a derivada em 4 pontos: 
+                no início, duas vezes no meio, e no fim do intervalo.
+            </p>
+            
+            <div class="equation-box">
+                $$ k_1 = f(y_n) $$
+                $$ k_2 = f\left(y_n + \frac{h}{2} k_1\right) $$
+                $$ k_3 = f\left(y_n + \frac{h}{2} k_2\right) $$
+                $$ k_4 = f(y_n + h \cdot k_3) $$
+            </div>
+
+            <p>O novo estado é uma média ponderada dessas estimativas:</p>
+
+            <div class="equation-box">
+                $$ y_{n+1} = y_n + \frac{h}{6}\left(k_1 + 2k_2 + 2k_3 + k_4\right) $$
+            </div>
+
+            <p>
+                Não nos aprofundamos na teoria por trás do método. Escolhemos o Runge-Kutta de 4ª ordem 
+                por ter uma boa precisão para sistemas de EDOs e ser bastante utilizado. 
+                Na prática, utilizamos a implementação pronta da biblioteca SciPy em Python.
+            </p>
+        </section>
+
+        <section id="comparacao">
+            <h2>População Fechada vs. Aberta</h2>
+            <p>
+                Uma diferença importante na modelagem é entre modelos de população fechada (\(\mu = 0\)) e aberta (\(\mu > 0\)).
+            </p>
+
+            <div class="comparison-grid">
+                <div class="card">
+                    <h3>Modelo Fechado (\(\mu = 0\))</h3>
+                    <p>
+                        Não entra ninguém novo. A doença consome a população suscetível até não conseguir mais se sustentar.
+                        A infecção some (\(I \to 0\)) e não há estado endêmico.
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Modelo Aberto (\(\mu > 0\))</h3>
+                    <p>
+                        Nascimentos trazem novos suscetíveis ("combustível"). Se \(R_0 > 1\), a doença não some, mas oscila 
+                        até um equilíbrio endêmico (\(I^* > 0\)).
+                    </p>
+                </div>
+            </div>
+
+            <figure>
+                <img src="comparacao_sir.png" alt="Gráfico comparando SIR Fechado vs Aberto">
+                <figcaption>
+                    Esquerda: População Fechada (surto único). Direita: População Aberta (oscilação até endemia).
+                </figcaption>
+            </figure>
+        </section>
+
+        <section id="estabilidade">
+            <h2>Análise de Estabilidade</h2>
+            <p>
+                Para entender o longo prazo, buscamos os pontos de equilíbrio (\(\dot{S} = \dot{I} = \dot{R} = 0\)).
+                Encontramos dois principais:
+            </p>
+            <ol>
+                <li><strong>Equilíbrio Livre de Doença:</strong> \(I^* = 0, S^* = N\).</li>
+                <li><strong>Equilíbrio Endêmico:</strong> (Só se \(R_0 > 1\))
+                    $$ S^* = \frac{N}{R_0}, \quad I^* = \frac{\mu N}{\beta} (R_0 - 1) $$
+                </li>
+            </ol>
+
+            <h3>Dedução Analítica dos Equilíbrios</h3>
+            <p>Partimos das condições onde as derivadas são nulas: \(\dot{S} = 0, \dot{I} = 0, \dot{R} = 0\).</p>
+
+            <h4>Obtendo \(S^*\)</h4>
+            <p>Da equação \(\dot{I} = 0\):</p>
+            <div class="equation-box">
+                $$ \beta \frac{S^* I^*}{N} - (\gamma + \mu) I^* = 0 $$
+                $$ I^* \left( \frac{\beta S^*}{N} - (\gamma + \mu) \right) = 0 $$
+            </div>
+            <p>Isso gera duas possibilidades:</p>
+            <ul>
+                <li>\(I^* = 0\) (Livre de Doença)</li>
+                <li>\(\frac{\beta S^*}{N} - (\gamma + \mu) = 0\) (Endêmico, \(I^* > 0\))</li>
+            </ul>
+            <p>Para o caso endêmico:</p>
+            <div class="equation-box small">
+                $$ S^* = \frac{N (\gamma + \mu)}{\beta} = \frac{N}{R_0} $$
+            </div>
+
+            <h4>Obtendo \(I^*\)</h4>
+            <p>Da equação \(\dot{S} = 0\):</p>
+            <div class="equation-box">
+                $$ \mu N - \beta \frac{S^* I^*}{N} - \mu S^* = 0 $$
+                $$ I^* = \frac{\mu N (N - S^*)}{\beta S^*} $$
+            </div>
+            <p>Substituindo \(S^* = N/R_0\):</p>
+            <div class="equation-box small">
+                $$ I^* = \frac{\mu N}{\beta} (R_0 - 1) $$
+            </div>
+
+            <h4>Obtendo \(R^*\)</h4>
+            <p>Como a população é constante: \( R^* = N - S^* - I^* \).</p>
+
+            <h3>Estabilidade Local</h3>
+            <p>
+                Analisamos a matriz Jacobiana \(J\) nos pontos de equilíbrio. Para o equilíbrio endêmico, a Jacobiana é:
+            </p>
+            <div class="equation-box">
+                $$ J = \begin{pmatrix} -\beta \frac{I}{N} - \mu & -\beta \frac{S}{N} \\ \beta \frac{I}{N} & \beta \frac{S}{N} - (\gamma + \mu) \end{pmatrix} $$
+            </div>
+            <p>
+                Os autovalores podem ter parte real negativa e parte imaginária, indicando um <strong>foco estável</strong>. 
+                Isso significa que o sistema retorna ao equilíbrio através de oscilações amortecidas.
+            </p>
+        </section>
+
+        <section id="periodicidade">
+            <h2>Periodicidade e Oscilações</h2>
+            <p>
+                Verificamos que há oscilações quando \( 4\det(J) - \operatorname{tr}(J)^2 > 0 \).
+                Nesse caso, o período das oscilações \(T\) é dado por:
+            </p>
+            <div class="equation-box">
+                $$ T \approx \frac{4\pi}{\sqrt{4\det(J) - \operatorname{tr}(J)^2}} $$
+            </div>
+            <p>
+                Substituindo os termos do nosso modelo:
+            </p>
+            <div class="equation-box">
+                $$ T \approx \frac{4\pi}{\sqrt{4\mu(\beta - \gamma - \mu) - \frac{\beta^{2}\mu^{2}}{(\gamma + \mu)^{2}}}} $$
+            </div>
+            <p>
+                Após uma perturbação, as soluções retornam ao equilíbrio com esse período e uma taxa de decaimento \(\tau\).
+            </p>
+        </section>
+
+        <section id="conclusao">
+            <h2>Conclusão</h2>
+            <p>
+                As simulações confirmaram nossa teoria. Concluímos que o modelo SIR com dinâmica vital 
+                mostra que doenças com \(R_0 > 1\) tendem a persistir na população de forma estável, 
+                mas não sem antes passar por ciclos de surtos (oscilações).
+            </p>
+            <p>
+                O código Python que usamos para gerar as animações está disponível para download:
+            </p>
+            <p style="text-align: center; margin-top: 1.5rem;">
+                <a href="simulador.html" class="btn-simulador">Ver Código Python →</a>
+            </p>
+        </section>
+
+        <section id="grupo">
+            <h2>Contribuições do grupo</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <h3>Pedro Cid</h3>
+                    <ul class="contributions-list">
+                        <li>Desenvolvimento do código em Python</li>
+                        <li>Elaboração do relatório escrito</li>
+                    </ul>
+                </div>
+                <div class="team-card">
+                    <h3>Angelo Serafini</h3>
+                    <ul class="contributions-list">
+                        <li>Criação dos slides da apresentação</li>
+                        <li>Análise de oscilações e periodicidade</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="referencias">
+            <h2>Referência</h2>
+            <div class="reference-item">
+                <p class="ref-text">
+                    Bjørnstad, O. N. (2018). <em>Epidemics: Models and Data using R</em>. 
+                    Springer International Publishing. 
+                    Link pelo site da springer:
+                    <a href="https://doi.org/10.1007/978-3-319-97487-3" target="_blank">https://doi.org/10.1007/978-3-319-97487-3</a>
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+    </footer>
+
+</body>
+</html>
